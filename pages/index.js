@@ -352,7 +352,7 @@ const App = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100  items-center justify-center ">
       <Head>
         <title>DevSolutions - Premium Websites & Apps</title>
         <meta
@@ -517,7 +517,7 @@ const App = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
-                className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
+                className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl "
               >
                 We craft high-performance websites & mobile apps that help your
                 business grow, stand out, and succeed in today’s competitive
@@ -709,7 +709,7 @@ const App = () => {
         className="py-16 bg-gradient-to-b from-white to-indigo-50"
         data-aos="fade-up"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl  px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center">
             <span className="inline-block px-4 py-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full text-sm font-medium">
@@ -718,7 +718,7 @@ const App = () => {
             <h2 className="mt-4 text-3xl font-extrabold text-gray-900 sm:text-4xl">
               Premium Websites & Apps
             </h2>
-            <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+            <p className="mt-4 max-w-2xl text-xl text-gray-500">
               Choose from our professionally crafted solutions
             </p>
           </div>
@@ -838,7 +838,7 @@ const App = () => {
         className="py-16 bg-gradient-to-b from-white to-indigo-50"
         data-aos="fade-right"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl  px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <span className="inline-block px-4 py-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full text-sm font-medium">
               Features
@@ -846,7 +846,7 @@ const App = () => {
             <h2 className="mt-4 text-3xl font-extrabold text-gray-900 sm:text-4xl">
               Cutting-Edge Technology
             </h2>
-            <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+            <p className="mt-4 max-w-2xl  text-xl text-gray-500">
               Our solutions incorporate the latest technologies for maximum
               performance
             </p>
@@ -906,7 +906,7 @@ const App = () => {
 
       {/* Testimonials */}
       <div className="py-16  bg-transparent" data-aos="zoom-in">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl  px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <span className="inline-block px-4 py-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full text-sm font-medium">
               Testimonials
@@ -914,7 +914,7 @@ const App = () => {
             <h2 className="mt-4 text-3xl font-extrabold text-gray-900 sm:text-4xl">
               What Our Clients Say
             </h2>
-            <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+            <p className="mt-4 max-w-2xl  text-xl text-gray-500">
               Don't just take our word for it - hear from our satisfied
               customers
             </p>
@@ -988,7 +988,7 @@ const App = () => {
             Numbers that show our trust and excellence
           </motion.p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl ">
             <AchievementCard
               icon={AcademicCapIcon}
               title="Websites Built"
@@ -1012,7 +1012,7 @@ const App = () => {
       </div>
       {/* Footer */}
       <footer className="relative bg-gradient-to-tr from-gray-900 via-gray-800 to-gray-900 text-gray-400 overflow-hidden">
-        <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-7xl  py-16 px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
             {/* Brand Section */}
             <div className="flex flex-col items-start sm:items-center md:items-start">
