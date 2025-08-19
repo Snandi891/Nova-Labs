@@ -364,7 +364,7 @@ const App = () => {
       {/* Navigation */}
 
       <nav className="bg-white/30 backdrop-blur-lg fixed w-full z-50 shadow-md border-b border-white/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             {/* Left Section */}
             <div className="flex items-center">
@@ -489,7 +489,7 @@ const App = () => {
 
       {/* Hero Section */}
       <div className="pt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="max-w-7xl  px-4 sm:px-6 lg:px-8 py-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* card1 */}
 
