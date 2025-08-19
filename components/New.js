@@ -777,7 +777,7 @@ export default function WebsiteAppSellingPlatform() {
               onClick={() => setIsCartOpen(false)}
             ></div>
             <div className="fixed inset-y-0 right-0 pl-10 max-w-full flex">
-              <div className="w-screen max-w-md">
+              <div className=" max-w-md">
                 <div className="h-full flex flex-col bg-white shadow-xl">
                   <div className="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
                     <div className="flex items-start justify-between">

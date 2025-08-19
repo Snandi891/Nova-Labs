@@ -352,7 +352,7 @@ const App = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100  items-center justify-center ">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100  ">
       <Head>
         <title>DevSolutions - Premium Websites & Apps</title>
         <meta
@@ -489,17 +489,16 @@ const App = () => {
 
       {/* Hero Section */}
       <div className="pt-16">
-        <div className="max-w-7xl  px-4 sm:px-6 lg:px-8 py-10">
+        <div className="max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            {/* card1 */}
-
-            <div className="animate-fade-in mt-[-50px]  text-center md:text-left">
+            {/* Left Card (Heading + Content) */}
+            <div className="animate-fade-in -mt-6 text-center md:text-left">
               {/* Heading */}
               <motion.h1
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight"
+                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight"
               >
                 Premium{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 drop-shadow-lg">
@@ -517,7 +516,7 @@ const App = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
-                className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl "
+                className="mt-4 sm:mt-6 text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto md:mx-0"
               >
                 We craft high-performance websites & mobile apps that help your
                 business grow, stand out, and succeed in today’s competitive
@@ -529,13 +528,13 @@ const App = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
-                className="mt-10 flex flex-wrap gap-4 justify-center md:justify-start"
+                className="mt-8 flex flex-wrap gap-4 justify-center md:justify-start"
               >
                 <motion.a
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   href="#products"
-                  className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-2xl transition-transform"
+                  className="px-6 sm:px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-2xl transition-transform text-sm sm:text-base"
                 >
                   Explore Our Products
                 </motion.a>
@@ -543,42 +542,43 @@ const App = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   href="/about"
-                  className="px-8 py-3 bg-white text-gray-900 font-medium rounded-lg border border-gray-300 hover:border-indigo-600 hover:shadow-md transition-all"
+                  className="px-6 sm:px-8 py-3 bg-white text-gray-900 font-medium rounded-lg border border-gray-300 hover:border-indigo-600 hover:shadow-md transition-all text-sm sm:text-base"
                 >
                   View Portfolio
                 </motion.a>
               </motion.div>
 
+              {/* Typing Effect Heading */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1, duration: 0.8 }}
-                className="mt-10"
+                className="mt-8 sm:mt-10"
               >
                 <h2
-                  className="font-bold text-2xl md:text-3xl lg:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 relative"
-                  style={{ minHeight: "2.5rem" }}
+                  className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 relative"
+                  style={{ minHeight: "2rem" }}
                 >
                   {text}
                   {/* Blinking cursor */}
                   <span
-                    className="absolute inline-block w-[2px] h-7 bg-indigo-500 ml-1 animate-blink"
+                    className="absolute inline-block w-[2px] h-6 sm:h-7 bg-indigo-500 ml-1 animate-blink"
                     style={{ top: "0" }}
                   ></span>
                 </h2>
               </motion.div>
 
-              {/* Add this in your global CSS or Tailwind config */}
+              {/* Blink Animation */}
               <style>
                 {`
-                  @keyframes blink {
-                    0%, 50%, 100% { opacity: 1; }
-                    25%, 75% { opacity: 0; }
-                  }
-                  .animate-blink {
-                    animation: blink 1s step-start infinite;
-                  }
-                  `}
+                @keyframes blink {
+                  0%, 50%, 100% { opacity: 1; }
+                  25%, 75% { opacity: 0; }
+                }
+                .animate-blink {
+                  animation: blink 1s step-start infinite;
+                }
+              `}
               </style>
 
               {/* Avatars + Trusted */}
@@ -586,7 +586,7 @@ const App = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.3, duration: 0.8 }}
-                className="mt-12 flex items-center justify-center md:justify-start space-x-4"
+                className="mt-10 flex items-center justify-center md:justify-start space-x-4"
               >
                 <div className="flex -space-x-3">
                   {["A", "B", "C"].map((item, i) => (
@@ -598,14 +598,14 @@ const App = () => {
                         repeat: Infinity,
                         delay: i * 0.3,
                       }}
-                      className="h-12 w-12 rounded-full ring-2 ring-white bg-gradient-to-r from-indigo-400 to-purple-400 flex items-center justify-center text-white text-lg font-bold shadow-lg"
+                      className="h-10 w-10 sm:h-12 sm:w-12 rounded-full ring-2 ring-white bg-gradient-to-r from-indigo-400 to-purple-400 flex items-center justify-center text-white text-sm sm:text-lg font-bold shadow-lg"
                     >
                       {item}
                     </motion.div>
                   ))}
                 </div>
 
-                <p className="text-gray-700 text-lg">
+                <p className="text-gray-700 text-sm sm:text-base md:text-lg">
                   Trusted by{" "}
                   <span className="font-bold text-indigo-600">
                     500+ businesses
@@ -615,39 +615,38 @@ const App = () => {
               </motion.div>
             </div>
 
-            {/* card2 */}
-
+            {/* Right Card */}
             <div className="relative animate-float">
               {/* Animated background blobs */}
-              <div className="absolute -top-8 -right-8 w-48 h-48 bg-indigo-500 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob"></div>
-              <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-purple-500 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob animation-delay-2000"></div>
-              <div className="absolute top-12 left-24 w-48 h-48 bg-pink-500 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob animation-delay-4000"></div>
+              <div className="absolute -top-6 -right-6 w-28 h-28 sm:w-40 sm:h-40 md:w-48 md:h-48 bg-indigo-500 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob"></div>
+              <div className="absolute -bottom-6 -left-6 w-28 h-28 sm:w-40 sm:h-40 md:w-48 md:h-48 bg-purple-500 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob animation-delay-2000"></div>
+              <div className="absolute top-12 left-12 w-28 h-28 sm:w-40 sm:h-40 md:w-48 md:h-48 bg-pink-500 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob animation-delay-4000"></div>
 
               {/* Card */}
-              <div className="relative max-w-lg ml-auto mr-5 bg-white/90 backdrop-blur-xl border border-white/30 rounded-2xl shadow-2xl hover:shadow-[0_0_50px_rgba(99,102,241,0.4)] transform hover:scale-105 transition-all duration-500 overflow-hidden">
-                {/* Header with gradient */}
-                <div className="h-64 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center relative">
+              <div className="relative max-w-md sm:max-w-lg mx-auto md:ml-auto md:mr-5 bg-white/90 backdrop-blur-xl border border-white/30 rounded-2xl shadow-2xl hover:shadow-[0_0_40px_rgba(99,102,241,0.4)] transform hover:scale-105 transition-all duration-500 overflow-hidden">
+                {/* Header */}
+                <div className="h-48 sm:h-56 md:h-64 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center relative">
                   <div className="absolute inset-0 bg-black/20"></div>
-                  <div className="text-center p-6 relative z-10">
-                    <h3 className="text-white text-3xl md:text-4xl font-extrabold drop-shadow-lg">
+                  <div className="text-center p-4 sm:p-6 relative z-10">
+                    <h3 className="text-white text-2xl sm:text-3xl md:text-4xl font-extrabold drop-shadow-lg">
                       🚀 Custom Solutions
                     </h3>
-                    <p className="text-indigo-100 mt-3 text-lg md:text-xl">
+                    <p className="text-indigo-100 mt-2 sm:mt-3 text-base sm:text-lg md:text-xl">
                       Tailored to your business needs
                     </p>
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-6 md:p-8">
-                  {/* Browser-style top bar */}
-                  <div className="flex justify-between items-center mb-6">
+                <div className="p-4 sm:p-6 md:p-8">
+                  {/* Browser top bar */}
+                  <div className="flex justify-between items-center mb-4 sm:mb-6">
                     <div className="flex items-center space-x-2">
-                      <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                      <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
+                      <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
+                      <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
                     </div>
-                    <div className="text-sm md:text-base font-medium text-gray-600">
+                    <div className="text-xs sm:text-sm md:text-base font-medium text-gray-600">
                       Starting at{" "}
                       <span className="font-semibold text-indigo-600">
                         $899
@@ -655,43 +654,43 @@ const App = () => {
                     </div>
                   </div>
 
-                  {/* Features list */}
-                  <div className="grid gap-4 mb-6">
-                    <div className="flex items-center space-x-4 bg-gray-50 p-4 md:p-5 rounded-xl hover:shadow-lg transition">
-                      <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-500 text-white text-xl md:text-2xl font-bold">
+                  {/* Features */}
+                  <div className="grid gap-3 sm:gap-4 mb-4 sm:mb-6">
+                    <div className="flex items-center space-x-3 sm:space-x-4 bg-gray-50 p-3 sm:p-4 md:p-5 rounded-xl hover:shadow-lg transition">
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-500 text-white text-lg sm:text-xl md:text-2xl font-bold">
                         💡
                       </div>
                       <div>
-                        <p className="text-gray-800 font-semibold md:text-lg">
+                        <p className="text-gray-800 font-semibold text-sm sm:text-base md:text-lg">
                           Innovative Ideas
                         </p>
-                        <p className="text-gray-500 text-sm md:text-base">
+                        <p className="text-gray-500 text-xs sm:text-sm md:text-base">
                           Fresh and modern solutions
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-4 bg-gray-50 p-4 md:p-5 rounded-xl hover:shadow-lg transition">
-                      <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-xl bg-gradient-to-tr from-pink-500 to-purple-500 text-white text-xl md:text-2xl font-bold">
+                    <div className="flex items-center space-x-3 sm:space-x-4 bg-gray-50 p-3 sm:p-4 md:p-5 rounded-xl hover:shadow-lg transition">
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center rounded-xl bg-gradient-to-tr from-pink-500 to-purple-500 text-white text-lg sm:text-xl md:text-2xl font-bold">
                         ⚡
                       </div>
                       <div>
-                        <p className="text-gray-800 font-semibold md:text-lg">
+                        <p className="text-gray-800 font-semibold text-sm sm:text-base md:text-lg">
                           Fast Delivery
                         </p>
-                        <p className="text-gray-500 text-sm md:text-base">
+                        <p className="text-gray-500 text-xs sm:text-sm md:text-base">
                           Quick turnaround time
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Buttons with gradient shimmer */}
-                  <div className="flex justify-center space-x-4">
-                    <button className="px-6 py-3 md:px-8 md:py-4 font-semibold rounded-lg text-white relative overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 shadow-lg hover:scale-105 transition transform duration-300">
+                  {/* Buttons */}
+                  <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+                    <button className="px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 font-semibold rounded-lg text-white relative overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 shadow-lg hover:scale-105 transition transform duration-300 text-sm sm:text-base">
                       <span className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/40 to-white/20 opacity-50 animate-gradient-shimmer"></span>
                       <span className="relative">Learn More</span>
                     </button>
-                    <button className="px-6 py-3 md:px-8 md:py-4 font-semibold rounded-lg text-indigo-600 relative overflow-hidden border border-indigo-600 bg-white shadow hover:scale-105 transition transform duration-300">
+                    <button className="px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 font-semibold rounded-lg text-indigo-600 relative overflow-hidden border border-indigo-600 bg-white shadow hover:scale-105 transition transform duration-300 text-sm sm:text-base">
                       <span className="absolute inset-0 bg-gradient-to-r from-indigo-100 via-white/50 to-indigo-100 opacity-30 animate-gradient-shimmer"></span>
                       <span className="relative">Get Started</span>
                     </button>
