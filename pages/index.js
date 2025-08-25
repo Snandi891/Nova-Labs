@@ -11,6 +11,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
+import SocialButtons from "./sample";
 
 // Counter animation component
 const Counter = ({ target }) => {
@@ -76,10 +77,9 @@ const App = () => {
   const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: false });
 
   const roles = [
-    "Ethical Hacking",
-    "Network Security",
-    "Bug Bounty",
-    "Malware Analysis",
+    "Static Website & App",
+    "Dynamic Website & App",
+    "Admin Panel Web & App",
   ];
 
   useEffect(() => {
@@ -112,17 +112,66 @@ const App = () => {
     return () => clearTimeout(timeout);
   }, [charIndex, deleting, roleIndex]);
 
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPhone, setUserPhone] = useState("");
+
   const handleCheckout = () => {
     setIsCheckoutOpen(true);
 
+    // ✅ Play success audio
     const audio = new Audio("/song/sucess.mp3");
     audio.play();
 
+    // ✅ Prepare order details
+    const orderSummary = cartItems
+      .map((item, index) => `   ${index + 1}. ${item.title} - ₹${item.price}`)
+      .join("\n");
+
+    // ✅ Format date & time
+    const now = new Date();
+    const orderDate = now.toLocaleString("en-IN", {
+      dateStyle: "full",
+      timeStyle: "short",
+    });
+
+    // ✅ WhatsApp Message with Unicode emojis & professional formatting
+    const message = `
+[Cart] New Order Received!
+
+[Customer Details]
+- Name: ${userName}
+- Email: ${userEmail}
+- Phone: ${userPhone}
+
+[Order Items]
+${orderSummary}
+
+[Summary]
+- Subtotal: ₹${subtotal}
+- Discount: ${discount}%
+- Total: ₹${total}
+
+[Order Date & Time]
+${orderDate}
+
+Thank you for shopping with us!
+`;
+
+    // ✅ Wait 3s → close cart → open WhatsApp
     setTimeout(() => {
       setIsCartOpen(false);
       setIsCheckoutOpen(false);
+
+      // Clear cart
       setCartItems([]);
-      localStorage.removeItem("cartItems"); // 🟢 Clear cart from localStorage
+      localStorage.removeItem("cartItems");
+
+      // Open WhatsApp with proper UTF-8 encoding
+      const whatsappUrl = `https://wa.me/917865089698?text=${encodeURIComponent(
+        message
+      )}`;
+      window.open(whatsappUrl, "_blank");
     }, 3000);
   };
 
@@ -182,7 +231,7 @@ const App = () => {
         id: 1,
         title: "E-commerce Website",
         description: "Fully responsive online store with payment gateway",
-        price: 1999,
+        price: 999,
         features: [
           "Product Catalog",
           "Shopping Cart",
@@ -195,7 +244,7 @@ const App = () => {
         id: 2,
         title: "Corporate Website",
         description: "Professional business website with CMS",
-        price: 1499,
+        price: 499,
         features: [
           "Responsive Design",
           "Content Management",
@@ -207,8 +256,9 @@ const App = () => {
       {
         id: 3,
         title: "Portfolio Website",
-        description: "Elegant showcase for creative work",
-        price: 899,
+        description:
+          "Elegant showcase for creative work and make your portfolio shine",
+        price: 299,
         features: [
           "Gallery Layouts",
           "Custom Animations",
@@ -221,7 +271,7 @@ const App = () => {
         id: 4,
         title: "Blog Platform",
         description: "Content-focused website with authoring tools",
-        price: 1299,
+        price: 799,
         features: [
           "User Management",
           "Comment System",
@@ -236,7 +286,7 @@ const App = () => {
         id: 5,
         title: "Mobile E-commerce App",
         description: "Native iOS/Android shopping experience",
-        price: 2999,
+        price: 699,
         features: [
           "Push Notifications",
           "Payment Integration",
@@ -249,7 +299,7 @@ const App = () => {
         id: 6,
         title: "Fitness Tracking App",
         description: "Activity monitoring with health integration",
-        price: 2499,
+        price: 499,
         features: [
           "Workout Plans",
           "Progress Tracking",
@@ -262,7 +312,7 @@ const App = () => {
         id: 7,
         title: "Restaurant Ordering App",
         description: "Food ordering and reservation system",
-        price: 2199,
+        price: 899,
         features: [
           "Menu Management",
           "Table Booking",
@@ -274,8 +324,8 @@ const App = () => {
       {
         id: 8,
         title: "Task Management App",
-        description: "Productivity tool for teams",
-        price: 1799,
+        description: "Productivity tool for teams and task app",
+        price: 799,
         features: [
           "Project Boards",
           "Team Collaboration",
@@ -349,7 +399,43 @@ const App = () => {
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
     { name: "About", path: "/about" },
+    { name: "sample", path: "/sample" },
   ];
+
+  const [open, setOpen] = useState(false);
+  const [form, setForm] = useState({
+    projectType: "Website",
+    siteType: "Static",
+    price: "",
+    name: "",
+    location: "",
+    email: "",
+    phone: "",
+    lastDate: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    const message = `New Project Request 🚀
+      
+  Type: ${form.projectType}
+  Site: ${form.siteType}
+  Price Range: ${form.price}
+  Name: ${form.name}
+  Location: ${form.location}
+  Email: ${form.email}
+  Phone: ${form.phone}
+  Last Date: ${form.lastDate}`;
+
+    const whatsappUrl = `https://wa.me/917865089689?text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(whatsappUrl, "_blank");
+    setOpen(false);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100  ">
@@ -363,38 +449,40 @@ const App = () => {
       </Head>
       {/* Navigation */}
 
-      <nav className="bg-white/30 backdrop-blur-lg fixed w-full z-50 shadow-md border-b border-white/20">
-        <div className="max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
+      <nav className="bg-white/40 backdrop-blur-xl fixed w-full z-50 shadow-lg border-b border-white/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
             {/* Left Section */}
             <div className="flex items-center">
               {/* Brand Name */}
               <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
                 className="flex-shrink-0 flex items-center"
               >
-                <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-extrabold text-2xl px-4 py-2 rounded-xl shadow-md tracking-wide">
-                  NovaLabs
+                <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 text-white font-bold text-xl px-4 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 tracking-tight">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-100">
+                    NovaLabs
+                  </span>
                 </div>
               </motion.div>
 
-              {/* Desktop Links */}
-              <div className="hidden md:ml-10 md:flex md:space-x-8">
+              {/* Desktop Navigation Links */}
+              <div className="hidden md:ml-12 md:flex md:space-x-10">
                 {navItems.map((item, idx) => (
                   <motion.div
                     key={idx}
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: idx * 0.15 }}
+                    transition={{ duration: 0.4, delay: idx * 0.1 }}
                   >
                     <Link
                       href={item.path}
-                      className="relative text-gray-700 hover:text-indigo-600 font-medium tracking-wide text-sm transition-colors duration-300 group"
+                      className="relative text-slate-700 hover:text-indigo-600 font-medium text-sm transition-colors duration-300 group py-2"
                     >
                       {item.name}
-                      <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-gradient-to-r from-indigo-600 to-purple-600 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-gradient-to-r from-indigo-600 to-purple-600 transition-all duration-300 group-hover:w-full rounded-full"></span>
                     </Link>
                   </motion.div>
                 ))}
@@ -402,33 +490,38 @@ const App = () => {
             </div>
 
             {/* Right Section */}
-            <div className="flex items-center">
-              {/* Cart */}
+            <div className="flex items-center space-x-4">
+              {/* Cart Button */}
               <motion.button
                 onClick={() => setIsCartOpen(true)}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="p-1 rounded-full text-gray-600 hover:text-indigo-600 transition duration-300 relative"
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="p-2 rounded-full text-slate-600 hover:text-indigo-600 hover:bg-white/50 transition-all duration-300 relative group"
+                aria-label="Shopping cart"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
+                  className="h-6 w-6 group-hover:scale-110 transition-transform duration-300"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  strokeWidth={1.8}
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth={2}
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                   />
                 </svg>
                 {cartItems.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
+                  <motion.span
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute -top-1 -right-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center shadow-sm"
+                  >
                     {cartItems.length}
-                  </span>
+                  </motion.span>
                 )}
               </motion.button>
 
@@ -437,54 +530,76 @@ const App = () => {
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="ml-4 inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-indigo-600 md:hidden"
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="md:hidden ml-2 inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-indigo-600 hover:bg-white/50 transition-colors duration-300"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
               >
-                <svg
-                  className="h-6 w-6"
-                  stroke="currentColor"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
+                {mobileMenuOpen ? (
+                  <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    className="h-6 w-6"
+                    stroke="currentColor"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                )}
               </motion.button>
             </div>
           </div>
         </div>
 
         {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="md:hidden bg-white/80 backdrop-blur-lg shadow-lg border-t border-white/20"
-          >
-            <div className="pt-2 pb-3 space-y-1">
-              {navItems.map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: idx * 0.1 }}
-                >
-                  <Link
-                    href={item.path}
-                    className="block pl-4 pr-6 py-2 text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition duration-300 font-medium"
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="md:hidden bg-white/90 backdrop-blur-2xl shadow-xl border-t border-white/30 overflow-hidden"
+            >
+              <div className="pt-2 pb-4 space-y-1">
+                {navItems.map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: idx * 0.1 }}
                   >
-                    {item.name}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        )}
+                    <Link
+                      href={item.path}
+                      className="block pl-4 pr-6 py-3 text-slate-700 hover:text-indigo-600 hover:bg-indigo-50/50 rounded-md transition-colors duration-300 font-medium mx-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero Section */}
@@ -492,7 +607,7 @@ const App = () => {
         <div className="max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Left Card (Heading + Content) */}
-            <div className="animate-fade-in -mt-6 text-center md:text-left">
+            <div className="animate-fade-in -mt-36 text-center md:text-left">
               {/* Heading */}
               <motion.h1
                 initial={{ opacity: 0, y: 40 }}
@@ -586,7 +701,7 @@ const App = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.3, duration: 0.8 }}
-                className="mt-10 flex items-center justify-center md:justify-start space-x-4"
+                className="mt-10 flex  items-center justify-center md:justify-start space-x-4"
               >
                 <div className="flex -space-x-3">
                   {["A", "B", "C"].map((item, i) => (
@@ -608,96 +723,312 @@ const App = () => {
                 <p className="text-gray-700 text-sm sm:text-base md:text-lg">
                   Trusted by{" "}
                   <span className="font-bold text-indigo-600">
-                    500+ businesses
+                    10+ businesses
                   </span>{" "}
                   worldwide 🌍
                 </p>
               </motion.div>
+              <div className="text-center lg:text-left">
+                <div className="flex pl-33.5 items-center justify-center lg:justify-start gap-1 mt-1">
+                  {[...Array(5)].map((_, i) => (
+                    <svg
+                      key={i}
+                      className="w-5 h-5 text-yellow-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                  <span className="text-gray-600 text-sm ml-1">5.0</span>
+                </div>
+              </div>
             </div>
 
             {/* Right Card */}
             <div className="relative animate-float">
-              {/* Animated background blobs */}
-              <div className="absolute -top-6 -right-6 w-28 h-28 sm:w-40 sm:h-40 md:w-48 md:h-48 bg-indigo-500 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob"></div>
-              <div className="absolute -bottom-6 -left-6 w-28 h-28 sm:w-40 sm:h-40 md:w-48 md:h-48 bg-purple-500 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob animation-delay-2000"></div>
-              <div className="absolute top-12 left-12 w-28 h-28 sm:w-40 sm:h-40 md:w-48 md:h-48 bg-pink-500 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob animation-delay-4000"></div>
+              {/* Background Blobs */}
+              <div className="absolute -top-6 -right-6 w-40 h-40 rounded-full filter blur-3xl opacity-60 animate-blob bg-gradient-to-tr from-indigo-500 to-purple-500"></div>
+              <div className="absolute -bottom-6 -left-6 w-40 h-40 rounded-full filter blur-3xl opacity-60 animate-blob animation-delay-2000 bg-gradient-to-tr from-purple-500 to-pink-500"></div>
+              <div className="absolute top-12 left-12 w-40 h-40 rounded-full filter blur-3xl opacity-60 animate-blob animation-delay-4000 bg-gradient-to-tr from-pink-500 to-indigo-500"></div>
 
               {/* Card */}
-              <div className="relative max-w-md sm:max-w-lg mx-auto md:ml-auto md:mr-5 bg-white/90 backdrop-blur-xl border border-white/30 rounded-2xl shadow-2xl hover:shadow-[0_0_40px_rgba(99,102,241,0.4)] transform hover:scale-105 transition-all duration-500 overflow-hidden">
+              <div className="relative max-w-lg mx-auto md:mr-5 bg-white/80 backdrop-blur-2xl border border-white/20 rounded-2xl shadow-xl hover:shadow-[0_0_50px_rgba(99,102,241,0.5)] hover:scale-[1.03] transition-all duration-500 overflow-hidden">
                 {/* Header */}
-                <div className="h-48 sm:h-56 md:h-64 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center relative">
-                  <div className="absolute inset-0 bg-black/20"></div>
-                  <div className="text-center p-4 sm:p-6 relative z-10">
-                    <h3 className="text-white text-2xl sm:text-3xl md:text-4xl font-extrabold drop-shadow-lg">
+                <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center relative py-10">
+                  <div className="absolute inset-0 bg-black/10"></div>
+                  <div className="text-center relative z-10 px-6">
+                    <h3 className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-indigo-200 via-purple-300 to-pink-200 text-4xl md:text-5xl font-extrabold drop-shadow-lg">
                       🚀 Custom Solutions
+                      <span className="block h-1 mt-3 bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-400 rounded-full animate-pulse"></span>
                     </h3>
-                    <p className="text-indigo-100 mt-2 sm:mt-3 text-base sm:text-lg md:text-xl">
+                    <p className="text-indigo-100 mt-3 text-lg md:text-xl">
                       Tailored to your business needs
                     </p>
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-4 sm:p-6 md:p-8">
-                  {/* Browser top bar */}
-                  <div className="flex justify-between items-center mb-4 sm:mb-6">
+                <div className="p-6 md:p-8">
+                  {/* Browser Bar */}
+                  <div className="flex justify-between items-center mb-6">
                     <div className="flex items-center space-x-2">
-                      <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
-                      <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
-                      <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
+                      <span className="w-3 h-3 bg-red-500 rounded-full"></span>
+                      <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
+                      <span className="w-3 h-3 bg-green-500 rounded-full"></span>
                     </div>
-                    <div className="text-xs sm:text-sm md:text-base font-medium text-gray-600">
+                    <div className="text-sm font-medium text-gray-600">
                       Starting at{" "}
-                      <span className="font-semibold text-indigo-600">
-                        $899
-                      </span>
+                      <span className="font-bold text-indigo-600">₹ 299</span>
                     </div>
                   </div>
-
                   {/* Features */}
-                  <div className="grid gap-3 sm:gap-4 mb-4 sm:mb-6">
-                    <div className="flex items-center space-x-3 sm:space-x-4 bg-gray-50 p-3 sm:p-4 md:p-5 rounded-xl hover:shadow-lg transition">
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-500 text-white text-lg sm:text-xl md:text-2xl font-bold">
-                        💡
+                  <div className="grid gap-4 mb-6 sm:grid-cols-2">
+                    {[
+                      {
+                        icon: "💡",
+                        title: "Innovative Ideas",
+                        desc: "Fresh & modern",
+                      },
+                      {
+                        icon: "⚡",
+                        title: "Fast & Scalable",
+                        desc: "Future-proof tech",
+                      },
+                      {
+                        icon: "🎨",
+                        title: "Beautiful Design",
+                        desc: "Eye-catching UI",
+                      },
+                    ].map((f, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center space-x-4 bg-white/40 backdrop-blur-md p-4 rounded-xl border border-white/20 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] transition"
+                      >
+                        <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-500 text-white text-2xl font-bold">
+                          {f.icon}
+                        </div>
+                        <div>
+                          <p className="text-gray-800 font-semibold">
+                            {f.title}
+                          </p>
+                          <p className="text-gray-500 text-sm">{f.desc}</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-gray-800 font-semibold text-sm sm:text-base md:text-lg">
-                          Innovative Ideas
-                        </p>
-                        <p className="text-gray-500 text-xs sm:text-sm md:text-base">
-                          Fresh and modern solutions
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-3 sm:space-x-4 bg-gray-50 p-3 sm:p-4 md:p-5 rounded-xl hover:shadow-lg transition">
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center rounded-xl bg-gradient-to-tr from-pink-500 to-purple-500 text-white text-lg sm:text-xl md:text-2xl font-bold">
-                        ⚡
-                      </div>
-                      <div>
-                        <p className="text-gray-800 font-semibold text-sm sm:text-base md:text-lg">
-                          Fast Delivery
-                        </p>
-                        <p className="text-gray-500 text-xs sm:text-sm md:text-base">
-                          Quick turnaround time
-                        </p>
-                      </div>
-                    </div>
+                    ))}
                   </div>
-
                   {/* Buttons */}
-                  <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-                    <button className="px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 font-semibold rounded-lg text-white relative overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 shadow-lg hover:scale-105 transition transform duration-300 text-sm sm:text-base">
-                      <span className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/40 to-white/20 opacity-50 animate-gradient-shimmer"></span>
-                      <span className="relative">Learn More</span>
-                    </button>
-                    <button className="px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 font-semibold rounded-lg text-indigo-600 relative overflow-hidden border border-indigo-600 bg-white shadow hover:scale-105 transition transform duration-300 text-sm sm:text-base">
-                      <span className="absolute inset-0 bg-gradient-to-r from-indigo-100 via-white/50 to-indigo-100 opacity-30 animate-gradient-shimmer"></span>
-                      <span className="relative">Get Started</span>
-                    </button>
+                  <div className="px-8  text-center">
+                    <motion.button
+                      onClick={() => setOpen(true)}
+                      whileHover={{
+                        scale: 1.08,
+                        boxShadow: "0 0 25px #9333ea",
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      className="px-10 py-4 rounded-full text-lg font-semibold bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 text-white shadow-xl border border-purple-400/40 relative overflow-hidden group"
+                    >
+                      <span className="relative z-10">✨ Get Started</span>
+                      <span className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition duration-500 animate-pulse"></span>
+                    </motion.button>
                   </div>
                 </div>
               </div>
             </div>
+
+            {/* Modal */}
+            {open && (
+              <div
+                style={{
+                  position: "fixed",
+                  inset: 0,
+                  zIndex: 50,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "rgba(0,0,0,0.7)",
+                  backdropFilter: "blur(8px)",
+                  padding: "1rem",
+                }}
+              >
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0, y: 50 }}
+                  animate={{ scale: 1, opacity: 1, y: 0 }}
+                  exit={{ scale: 0.9, opacity: 0, y: 40 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    maxWidth: "600px",
+                    maxHeight: "90vh",
+                    overflowY: "auto",
+                    background: "rgba(255,255,255,0.1)",
+                    backdropFilter: "blur(20px)",
+                    border: "1px solid rgba(255,255,255,0.2)",
+                    borderRadius: "1.5rem",
+                    boxShadow: "0 0 25px rgba(168,85,247,0.4)",
+                    padding: "2rem",
+                    scrollbarWidth: "none", // Firefox
+                    msOverflowStyle: "none", // IE & Edge
+                  }}
+                >
+                  {/* Hide scrollbar for WebKit */}
+                  <style>
+                    {`
+          div::-webkit-scrollbar {
+            display: none;
+          }
+        `}
+                  </style>
+
+                  {/* Close button */}
+                  <button
+                    onClick={() => setOpen(false)}
+                    style={{
+                      position: "absolute",
+                      top: "1rem",
+                      right: "1rem",
+                      fontSize: "1.2rem",
+                      color: "#d1d5db",
+                      cursor: "pointer",
+                      transition: "all 0.2s ease-in-out",
+                    }}
+                    onMouseOver={(e) => (e.currentTarget.style.color = "#fff")}
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.color = "#d1d5db")
+                    }
+                  >
+                    ✖
+                  </button>
+
+                  {/* Heading */}
+                  <h2
+                    style={{
+                      fontSize: "1.875rem",
+                      fontWeight: "800",
+                      marginBottom: "1.5rem",
+                      textAlign: "center",
+                      background:
+                        "linear-gradient(to right, #818cf8, #a855f7, #ec4899)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.5))",
+                    }}
+                  >
+                    🚀 Project Details
+                  </h2>
+
+                  {/* Form */}
+                  <div style={{ display: "grid", gap: "1.25rem" }}>
+                    {/* Select Fields */}
+                    <select
+                      name="projectType"
+                      value={form.projectType}
+                      onChange={handleChange}
+                      style={{
+                        width: "100%",
+                        borderRadius: "0.75rem",
+                        background: "rgba(255,255,255,0.1)",
+                        color: "#fff",
+                        border: "1px solid rgba(255,255,255,0.2)",
+                        padding: "0.75rem",
+                        outline: "none",
+                      }}
+                    >
+                      <option style={{ color: "#111" }}>Website</option>
+                      <option style={{ color: "#111" }}>App</option>
+                    </select>
+
+                    <select
+                      name="siteType"
+                      value={form.siteType}
+                      onChange={handleChange}
+                      style={{
+                        width: "100%",
+                        borderRadius: "0.75rem",
+                        background: "rgba(255,255,255,0.1)",
+                        color: "#fff",
+                        border: "1px solid rgba(255,255,255,0.2)",
+                        padding: "0.75rem",
+                        outline: "none",
+                      }}
+                    >
+                      <option style={{ color: "#111" }}>Static</option>
+                      <option style={{ color: "#111" }}>Dynamic</option>
+                    </select>
+
+                    {/* Input Fields */}
+                    {[
+                      { type: "text", name: "price", label: "Price Range" },
+                      { type: "text", name: "name", label: "Your Name" },
+                      { type: "text", name: "location", label: "Location" },
+                      { type: "email", name: "email", label: "Email" },
+                      { type: "tel", name: "phone", label: "Phone Number" },
+                      { type: "date", name: "lastDate", label: "Last Date" },
+                    ].map((field) => (
+                      <div key={field.name} style={{ position: "relative" }}>
+                        <input
+                          type={field.type}
+                          name={field.name}
+                          value={form[field.name]}
+                          onChange={handleChange}
+                          placeholder={field.label}
+                          style={{
+                            width: "100%",
+                            borderRadius: "0.75rem",
+                            background: "rgba(255,255,255,0.1)",
+                            color: "#fff",
+                            border: "1px solid rgba(255,255,255,0.2)",
+                            padding: "0.75rem",
+                            outline: "none",
+                          }}
+                        />
+                        <label
+                          style={{
+                            position: "absolute",
+                            left: "0.75rem",
+                            top: "-0.6rem",
+                            fontSize: "0.85rem",
+                            color: "#d1d5db",
+                            background: "rgba(0,0,0,0.4)",
+                            padding: "0 0.25rem",
+                            borderRadius: "0.25rem",
+                          }}
+                        >
+                          {field.label}
+                        </label>
+                      </div>
+                    ))}
+
+                    {/* Submit Button */}
+                    <button
+                      onClick={handleSubmit}
+                      style={{
+                        marginTop: "1.5rem",
+                        width: "100%",
+                        borderRadius: "0.75rem",
+                        padding: "0.75rem",
+                        fontWeight: "600",
+                        color: "#fff",
+                        background:
+                          "linear-gradient(to right, #6366f1, #9333ea, #ec4899)",
+                        boxShadow: "0 0 20px rgba(236,72,153,0.6)",
+                        cursor: "pointer",
+                        transition: "all 0.3s ease-in-out",
+                      }}
+                      onMouseOver={(e) =>
+                        (e.currentTarget.style.transform = "scale(1.05)")
+                      }
+                      onMouseOut={(e) =>
+                        (e.currentTarget.style.transform = "scale(1)")
+                      }
+                    >
+                      Submit on WhatsApp
+                    </button>
+                  </div>
+                </motion.div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -705,53 +1036,101 @@ const App = () => {
       {/* Products Section */}
       <section
         id="products"
-        className="py-16 bg-gradient-to-b from-white to-indigo-50"
+        className="py-12 md:py-10 bg-gradient-to-br from-slate-50 to-indigo-50/30 relative overflow-hidden"
         data-aos="fade-up"
       >
-        <div className="max-w-7xl  px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Header */}
-          <div className="text-center">
-            <span className="inline-block px-4 py-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full text-sm font-medium">
+          <div className="text-center mb-10 md:mb-12">
+            <span className="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs font-semibold tracking-wide uppercase bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-500/20">
+              <svg
+                className="w-3 h-3 md:w-4 md:h-4 mr-1.5"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
               Our Products
             </span>
-            <h2 className="mt-4 text-3xl font-extrabold text-gray-900 sm:text-4xl">
-              Premium Websites & Apps
+            <h2 className="mt-4 text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent sm:text-4xl md:text-5xl">
+              Premium Digital Solutions
             </h2>
-            <p className="mt-4 max-w-2xl text-xl text-gray-500">
-              Choose from our professionally crafted solutions
+            <p className="mt-3 text-base text-gray-600 max-w-2xl mx-auto md:text-lg md:mt-4">
+              Custom-built websites and mobile applications designed to elevate
+              your digital presence.
             </p>
           </div>
 
           {/* Tabs */}
-          <div className="mt-12 flex justify-center">
-            <div className="inline-flex rounded-md shadow-sm" role="group">
+          <div className="flex justify-center mb-10 md:mb-14">
+            <div
+              className="inline-flex bg-gray-100 p-1 rounded-lg md:p-1.5 md:rounded-xl shadow-sm"
+              role="group"
+            >
               <button
                 type="button"
                 onClick={() => setActiveTab("websites")}
-                className={`px-6 py-3 text-sm font-medium rounded-l-lg ${
+                className={`flex items-center px-4 py-2 md:px-6 md:py-3 text-sm font-medium rounded-lg transition-all duration-300 ${
                   activeTab === "websites"
-                    ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    ? "bg-white text-gray-900 shadow-md"
+                    : "text-gray-600 hover:text-gray-900"
                 }`}
               >
-                Websites
+                <svg
+                  className={`w-4 h-4 mr-2 ${
+                    activeTab === "websites"
+                      ? "text-indigo-600"
+                      : "text-gray-400"
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+                  ></path>
+                </svg>
+                <span className="hidden xs:inline">Websites</span>
+                <span className="xs:hidden">Web</span>
               </button>
               <button
                 type="button"
                 onClick={() => setActiveTab("apps")}
-                className={`px-6 py-3 text-sm font-medium rounded-r-lg ${
+                className={`flex items-center px-4 py-2 md:px-6 md:py-3 text-sm font-medium rounded-lg transition-all duration-300 ${
                   activeTab === "apps"
-                    ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    ? "bg-white text-gray-900 shadow-md"
+                    : "text-gray-600 hover:text-gray-900"
                 }`}
               >
-                Mobile Apps
+                <svg
+                  className={`w-4 h-4 mr-2 ${
+                    activeTab === "apps" ? "text-indigo-600" : "text-gray-400"
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                  ></path>
+                </svg>
+                <span className="hidden xs:inline">Mobile Apps</span>
+                <span className="xs:hidden">Apps</span>
               </button>
             </div>
           </div>
 
           {/* Product Grid with Animations */}
-          <div className="mt-10">
+          <div className="mt-8 md:mt-10">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
@@ -759,51 +1138,82 @@ const App = () => {
                 initial="hidden"
                 animate="show"
                 exit="exit"
-                className="grid gap-8 lg:grid-cols-2 xl:grid-cols-4"
+                className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
               >
                 {products[activeTab].map((product) => (
                   <motion.div
                     key={product.id}
                     variants={cardVariants}
-                    className="bg-gray-50 rounded-2xl shadow-sm overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-2"
+                    className="group bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 md:hover:-translate-y-2 relative"
                   >
-                    <div className="p-6">
+                    <div className="absolute top-3 right-3 md:top-4 md:right-4">
+                      <button className="text-gray-400 hover:text-gray-600 transition-colors">
+                        <svg
+                          className="w-4 h-4 md:w-5 md:h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+                          ></path>
+                        </svg>
+                      </button>
+                    </div>
+
+                    <div className="p-4 md:p-6">
                       {/* Icon */}
-                      <div className="flex justify-center mb-6">
-                        <div className="bg-gradient-to-r from-indigo-100 to-purple-100 border-2 border-dashed rounded-xl w-16 h-16 flex items-center justify-center text-2xl">
+                      <div className="flex justify-center mb-4 md:mb-6">
+                        <div className="bg-gradient-to-br from-indigo-100 to-purple-100 rounded-xl md:rounded-2xl w-12 h-12 md:w-16 md:h-16 flex items-center justify-center text-xl md:text-2xl shadow-inner group-hover:scale-110 transition-transform duration-300">
                           {product.icon}
                         </div>
                       </div>
 
                       {/* Title & Description */}
-                      <h3 className="text-xl font-bold text-gray-900">
+                      <h3 className="text-lg md:text-xl font-bold text-gray-900 text-center">
                         {product.title}
                       </h3>
-                      <p className="mt-2 text-gray-600">
+                      <p className="mt-2 md:mt-3 text-sm text-gray-600 text-center md:leading-relaxed">
                         {product.description}
                       </p>
 
                       {/* Features */}
-                      <div className="mt-4">
-                        <h4 className="text-sm font-medium text-gray-900">
-                          Features:
+                      <div className="mt-4 md:mt-6 pt-4 md:pt-6 border-t border-gray-100">
+                        <h4 className="text-xs md:text-sm font-semibold text-gray-900 mb-2 md:mb-3 flex items-center">
+                          <svg
+                            className="w-3 h-3 md:w-4 md:h-4 mr-1.5 text-indigo-600"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          Key Features
                         </h4>
-                        <ul className="mt-2 space-y-1">
+                        <ul className="space-y-1.5 md:space-y-2.5">
                           {product.features.map((feature, index) => (
                             <li key={index} className="flex items-start">
                               <svg
-                                className="h-5 w-5 text-green-500"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
+                                className="h-3 w-3 md:h-4 md:w-4 text-emerald-500 mt-0.5 mr-2 flex-shrink-0"
                                 fill="currentColor"
+                                viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg"
                               >
                                 <path
                                   fillRule="evenodd"
-                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                   clipRule="evenodd"
                                 />
                               </svg>
-                              <span className="ml-2 text-gray-600">
+                              <span className="text-gray-600 text-xs md:text-sm">
                                 {feature}
                               </span>
                             </li>
@@ -812,14 +1222,33 @@ const App = () => {
                       </div>
 
                       {/* Price & Button */}
-                      <div className="mt-6 flex items-center justify-between">
-                        <span className="text-2xl font-bold text-gray-900">
-                          ${product.price}
-                        </span>
+                      <div className="mt-6 md:mt-8 flex flex-col xs:flex-row xs:items-center xs:justify-between space-y-3 xs:space-y-0">
+                        <div>
+                          <span className="text-xl md:text-2xl font-bold text-gray-900">
+                            ${product.price}
+                          </span>
+                          <span className="text-xs text-gray-500 block">
+                            one-time payment
+                          </span>
+                        </div>
                         <button
                           onClick={() => addToCart(product)}
-                          className="px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium rounded-md hover:opacity-90"
+                          className="px-4 py-2 md:px-5 md:py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs md:text-sm font-medium rounded-lg shadow-md shadow-indigo-500/40 hover:shadow-lg hover:shadow-indigo-500/50 transition-all duration-300 flex items-center justify-center"
                         >
+                          <svg
+                            className="w-3 h-3 md:w-4 md:h-4 mr-1.5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                            ></path>
+                          </svg>
                           Add to Cart
                         </button>
                       </div>
@@ -834,69 +1263,75 @@ const App = () => {
 
       {/* Features Section */}
       <div
-        className="py-16 bg-gradient-to-b from-white to-indigo-50"
-        data-aos="fade-right"
+        className="py-10 bg-gradient-to-br from-slate-50 to-indigo-50/30"
+        data-aos="fade-up"
       >
-        <div className="max-w-7xl  px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <span className="inline-block px-4 py-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full text-sm font-medium">
-              Features
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <span className="inline-block px-5 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full text-sm font-medium tracking-wider uppercase shadow-lg shadow-indigo-500/10">
+              Premium Features
             </span>
-            <h2 className="mt-4 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+            <h2 className="mt-6 text-4xl font-bold text-slate-900 sm:text-5xl">
               Cutting-Edge Technology
             </h2>
-            <p className="mt-4 max-w-2xl  text-xl text-gray-500">
-              Our solutions incorporate the latest technologies for maximum
-              performance
+            <p className="mt-4 max-w-2xl mx-auto text-xl text-slate-600">
+              Our innovative solutions incorporate the latest technologies for
+              unmatched performance and reliability
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 icon: "⚡",
                 title: "Lightning Fast",
                 description:
-                  "Optimized for maximum speed with modern frameworks",
+                  "Optimized for maximum speed with modern frameworks and performance enhancements",
               },
               {
                 icon: "🔒",
                 title: "Secure by Design",
                 description:
-                  "Enterprise-grade security with encryption and audits",
+                  "Enterprise-grade security with end-to-end encryption and regular security audits",
               },
               {
                 icon: "📱",
                 title: "Fully Responsive",
-                description: "Flawless experience on all devices",
+                description:
+                  "Flawless experience across all devices with adaptive design principles",
               },
               {
                 icon: "🔍",
                 title: "SEO Optimized",
                 description:
-                  "Built with SEO best practices for better rankings",
+                  "Built with SEO best practices to ensure better rankings and online visibility",
               },
               {
                 icon: "🔄",
                 title: "Regular Updates",
-                description: "Continuous improvements to keep you competitive",
+                description:
+                  "Continuous improvements and feature enhancements to keep you ahead of competition",
               },
               {
                 icon: "🛟",
                 title: "24/7 Support",
                 description:
-                  "Dedicated support team available around the clock",
+                  "Dedicated support team available around the clock to assist with any issues",
               },
             ].map((feature, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-indigo-100 hover:-translate-y-1"
               >
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-2xl shadow-lg shadow-indigo-500/20 group-hover:shadow-indigo-500/40 transition-shadow duration-300 mb-6">
+                  <span className="text-2xl text-white">{feature.icon}</span>
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <p className="text-slate-600 leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
             ))}
           </div>
@@ -906,20 +1341,20 @@ const App = () => {
       {/* Testimonials */}
       <div className="py-16  bg-transparent" data-aos="zoom-in">
         <div className="max-w-7xl  px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <span className="inline-block px-4 py-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full text-sm font-medium">
+          <div className="text-center mb-16">
+            <span className="inline-block px-5 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full text-sm font-medium tracking-wider uppercase shadow-lg shadow-indigo-500/20 mb-4">
               Testimonials
             </span>
-            <h2 className="mt-4 text-3xl font-extrabold text-gray-900 sm:text-4xl">
+            <h2 className="mt-2 text-4xl font-bold text-slate-900 sm:text-5xl">
               What Our Clients Say
             </h2>
-            <p className="mt-4 max-w-2xl  text-xl text-gray-500">
-              Don't just take our word for it - hear from our satisfied
+            <p className="mt-4 max-w-2xl mx-auto text-xl text-slate-600">
+              Don't just take our word for it — hear from our satisfied
               customers
             </p>
           </div>
 
-          <div className="mt-16 grid gap-8 lg:grid-cols-3">
+          <div className="mt-16 grid gap-8 lg:grid-cols-3 ml-16">
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
@@ -987,17 +1422,17 @@ const App = () => {
             Numbers that show our trust and excellence
           </motion.p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl ">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <AchievementCard
               icon={AcademicCapIcon}
               title="Websites Built"
-              target={50}
+              target={10}
               inView={inView}
             />
             <AchievementCard
               icon={UsersIcon}
               title="Happy Clients"
-              target={10}
+              target={8}
               inView={inView}
             />
             <AchievementCard
@@ -1011,128 +1446,46 @@ const App = () => {
       </div>
       {/* Footer */}
       <footer className="relative bg-gradient-to-tr from-gray-900 via-gray-800 to-gray-900 text-gray-400 overflow-hidden">
-        <div className="max-w-7xl  py-16 px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+        <div className="max-w-7xl  py-6 px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center">
             {/* Brand Section */}
-            <div className="flex flex-col items-start sm:items-center md:items-start">
-              <div className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold text-2xl px-4 py-2 rounded-xl shadow-lg mb-4 animate-pulse">
+            <div className="flex flex-col space-y-4 text-center sm:text-left">
+              <div className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold text-2xl px-6 py-3 rounded-2xl shadow-lg animate-pulse inline-block">
                 NovaLabs
               </div>
-              <p className="text-gray-400 text-center sm:text-center md:text-left">
+              <p className="text-gray-400 max-w-md mx-auto sm:mx-0">
                 Professional website and app development services for businesses
                 of all sizes.
               </p>
-              <div className="mt-4 flex space-x-4">
-                {/* Social Icons */}
-                {[
-                  {
-                    name: "Facebook",
-                    icon: "M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z",
-                  },
-                  {
-                    name: "Twitter",
-                    icon: "M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84",
-                  },
-                  {
-                    name: "LinkedIn",
-                    icon: "M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z",
-                  },
-                ].map((social, idx) => (
-                  <a
-                    key={idx}
-                    href="#"
-                    className="bg-gray-800 hover:bg-indigo-600 transition-colors duration-300 p-3 rounded-full shadow-lg hover:shadow-indigo-400 hover:scale-110 transform"
-                    aria-label={social.name}
-                  >
-                    <svg
-                      className="h-6 w-6 text-white"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path d={social.icon} />
-                    </svg>
-                  </a>
-                ))}
-              </div>
             </div>
 
-            {/* Products Section */}
-            <div className="flex flex-col items-center md:items-start">
-              <h3 className="text-sm font-semibold text-gray-200 tracking-wider uppercase mb-4">
-                Products
-              </h3>
-              <ul className="space-y-3 text-center md:text-left">
-                {[
-                  "Websites",
-                  "Mobile Apps",
-                  "E-commerce",
-                  "Custom Solutions",
-                ].map((item, idx) => (
-                  <li key={idx}>
-                    <a className="relative hover:text-white transition-colors duration-200 cursor-pointer">
-                      {item}
-                      <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Company Section */}
-            <div className="flex flex-col items-center md:items-start">
-              <h3 className="text-sm font-semibold text-gray-200 tracking-wider uppercase mb-4">
-                Company
-              </h3>
-              <ul className="space-y-3 text-center md:text-left">
-                {["About Us", "Careers", "Blog", "Contact"].map((item, idx) => (
-                  <li key={idx}>
-                    <a className="relative hover:text-white transition-colors duration-200 cursor-pointer">
-                      {item}
-                      <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Legal Section */}
-            <div className="flex flex-col items-center md:items-start">
-              <h3 className="text-sm font-semibold text-gray-200 tracking-wider uppercase mb-4">
-                Legal
-              </h3>
-              <ul className="space-y-3 text-center md:text-left">
-                {["Privacy Policy", "Terms of Service", "Cookie Policy"].map(
-                  (item, idx) => (
-                    <li key={idx}>
-                      <a className="relative hover:text-white transition-colors duration-200 cursor-pointer">
-                        {item}
-                        <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
-                      </a>
-                    </li>
-                  )
-                )}
-              </ul>
+            {/* Contact / Social Section */}
+            <div className="flex mt-20 mr-8 justify-center sm:justify-end">
+              <SocialButtons />
             </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className="mt-12 border-t border-gray-700 pt-8 flex flex-col sm:flex-row justify-center sm:justify-between items-center text-center sm:text-left space-y-4 sm:space-y-0">
+          <div className="mt-5 border-t border-gray-700 pt-8 flex flex-col sm:flex-row justify-center sm:justify-between items-center text-center sm:text-left space-y-4 sm:space-y-0">
             <p className="text-gray-400 text-sm">
-              &copy; 2023 NovaLabs. All rights reserved.
+              &copy; 2022 NovaLabs. All rights reserved.
             </p>
             <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6">
-              {["Privacy Policy", "Terms of Service", "Cookie Policy"].map(
-                (item, idx) => (
-                  <a
-                    key={idx}
-                    className="relative hover:text-white transition-colors duration-200 cursor-pointer"
-                  >
-                    {item}
-                    <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
-                  </a>
-                )
-              )}
+              {[
+                { name: "Contact Us", href: "/about" },
+                { name: "Privacy Policy", href: "/privecy" },
+                { name: "Terms of Service", href: "/terms" },
+                { name: "Cookie Policy", href: "/cookie" },
+              ].map((link, idx) => (
+                <a
+                  key={idx}
+                  href={link.href}
+                  className="relative text-gray-300 hover:text-white transition-colors duration-200 group"
+                >
+                  {link.name}
+                  <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              ))}
             </div>
           </div>
         </div>
@@ -1160,6 +1513,31 @@ const App = () => {
               >
                 ✖
               </button>
+            </div>
+
+            {/* User Info Inputs */}
+            <div className="p-4 border-b border-gray-200 space-y-3">
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-400 outline-none"
+              />
+              <input
+                type="email"
+                placeholder="Email Address"
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-400 outline-none"
+              />
+              <input
+                type="tel"
+                placeholder="Phone Number"
+                value={userPhone}
+                onChange={(e) => setUserPhone(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-400 outline-none"
+              />
             </div>
 
             {/* Cart Items */}
@@ -1247,6 +1625,7 @@ const App = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
       {isCheckoutOpen && (
         <div className="fixed inset-0 z-60 flex items-center justify-center">
           {/* Animated Background */}

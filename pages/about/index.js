@@ -2,11 +2,13 @@ import React, { useEffect, useState, useRef } from "react";
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import toast from "react-hot-toast";
+import SocialButtons from "../sample";
 
 const ProfessionalAboutPage = () => {
   const blob1Controls = useAnimation();
   const blob2Controls = useAnimation();
   const blob3Controls = useAnimation();
+  const blob4Controls = useAnimation(); // ✅ New blob control
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -23,6 +25,7 @@ const ProfessionalAboutPage = () => {
       blob1Controls.start({ y: scrollY * 0.3 });
       blob2Controls.start({ y: scrollY * 0.1 });
       blob3Controls.start({ y: scrollY * 0.2 });
+      blob4Controls.start({ y: scrollY * 0.15 }); // ✅ Scroll effect for blob4
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -31,7 +34,7 @@ const ProfessionalAboutPage = () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", checkMobile);
     };
-  }, [blob1Controls, blob2Controls, blob3Controls]);
+  }, [blob1Controls, blob2Controls, blob3Controls, blob4Controls]);
 
   // Animation variants
   const fadeIn = {
@@ -120,20 +123,32 @@ const ProfessionalAboutPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="relative min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 overflow-hidden">
       {/* Background animated blobs */}
       <motion.div
         animate={blob1Controls}
-        className="absolute -top-16 -right-16 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob"
+        className="absolute -top-20 -right-20 w-80 h-80 bg-gradient-to-tr from-indigo-400 via-purple-400 to-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob"
+        style={{ animationDuration: "20s" }}
       ></motion.div>
+
       <motion.div
         animate={blob2Controls}
-        className="absolute -bottom-20 -left-20 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-2000"
+        className="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-tr from-purple-300 via-pink-300 to-yellow-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"
+        style={{ animationDuration: "25s" }}
       ></motion.div>
+
       <motion.div
         animate={blob3Controls}
-        className="absolute top-28 left-32 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-4000"
+        className="absolute top-32 left-40 w-72 h-72 bg-gradient-to-tr from-pink-400 via-red-300 to-orange-300 rounded-full mix-blend-multiply filter blur-2xl opacity-60 animate-blob animation-delay-4000"
+        style={{ animationDuration: "22s" }}
       ></motion.div>
+
+      <motion.div
+        animate={blob4Controls}
+        className="absolute top-10 right-10 w-64 h-64 bg-gradient-to-tr from-cyan-300 via-blue-400 to-indigo-400 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob animation-delay-6000"
+        style={{ animationDuration: "28s" }}
+      ></motion.div>
+
       {/* Back Button with hover effect */}
       <div className="relative z-30 pt-8 px-6 sm:px-8">
         <motion.a
@@ -369,7 +384,7 @@ const ProfessionalAboutPage = () => {
                 From Vision to Impact
               </h2>
               <p className="mt-4 text-lg text-gray-600">
-                Founded in 2015, TechSolutions began as a small team of
+                Founded in 2022, TechSolutions began as a small team of
                 passionate developers and designers with a shared vision: to
                 create digital experiences that transform businesses.
               </p>
@@ -453,13 +468,13 @@ const ProfessionalAboutPage = () => {
               </h3>
               <p className="text-gray-600">
                 Over the past eight years, we've grown from a garage startup to
-                a team of 50+ professionals serving clients across 12 countries.
+                a team of 10+ professionals serving clients across 2+ countries.
                 Our journey has been marked by continuous innovation and a
                 commitment to excellence.
               </p>
               <p className="text-gray-600">
                 We've had the privilege of partnering with industry leaders and
-                startups alike, delivering over 300 successful projects that
+                startups alike, delivering over 15+ successful projects that
                 have transformed digital experiences and driven measurable
                 business results.
               </p>
@@ -483,15 +498,15 @@ const ProfessionalAboutPage = () => {
             variants={staggerContainer}
           >
             <motion.div variants={fadeIn} className="p-6">
-              <p className="text-4xl font-bold">300+</p>
+              <p className="text-4xl font-bold">15+</p>
               <p className="mt-2 text-black">Projects Delivered</p>
             </motion.div>
             <motion.div variants={fadeIn} className="p-6">
-              <p className="text-4xl font-bold">50+</p>
+              <p className="text-4xl font-bold">10+</p>
               <p className="mt-2 text-black">Team Members</p>
             </motion.div>
             <motion.div variants={fadeIn} className="p-6">
-              <p className="text-4xl font-bold">8+</p>
+              <p className="text-4xl font-bold">3+</p>
               <p className="mt-2 text-black">Years Experience</p>
             </motion.div>
             <motion.div variants={fadeIn} className="p-6">
@@ -702,35 +717,19 @@ const ProfessionalAboutPage = () => {
                       <span className="flex items-center justify-center w-10 h-10 bg-white/20 rounded-full mr-4 shadow-sm">
                         📞
                       </span>
-                      +1 (555) 123-4567
+                      +91 (7865089698)
                     </div>
                     <div className="flex items-center">
                       <span className="flex items-center justify-center w-10 h-10 bg-white/20 rounded-full mr-4 shadow-sm">
                         📧
                       </span>
-                      contact@digitalworks.com
+                      sayannath8888@gmail.com
                     </div>
                     <div className="flex items-center">
                       <span className="flex items-center justify-center w-10 h-10 bg-white/20 rounded-full mr-4 shadow-sm">
                         📍
                       </span>
-                      123 Innovation Street, Tech City, TC 10101
-                    </div>
-                  </div>
-
-                  {/* Social Links */}
-                  <div className="mt-10">
-                    <h3 className="text-lg font-bold mb-4">Follow Us</h3>
-                    <div className="flex space-x-6">
-                      {["twitter", "instagram", "linkedin"].map((icon) => (
-                        <a
-                          key={icon}
-                          href="#"
-                          className="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 shadow-md hover:shadow-lg transition transform hover:scale-110"
-                        >
-                          <span className="text-xl">🌐</span>
-                        </a>
-                      ))}
+                      Remote - India
                     </div>
                   </div>
                 </div>
@@ -739,20 +738,19 @@ const ProfessionalAboutPage = () => {
           </div>
         </div>
       </section>
+
       {/* Footer */}
-      <footer className="relative z-10 bg-gray-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">TS</span>
-                </div>
-                <span className="ml-3 text-xl font-bold">TechSolutions</span>
+      <footer className="relative z-10  bg-gradient-to-tr from-gray-900 via-gray-800 to-gray-900 text-gray-400 overflow-hidden justify-end">
+        <div className="max-w-7xl  py-6 px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 items-center">
+            {/* Brand Section */}
+            <div className="flex flex-col space-y-4 text-center sm:text-left">
+              <div className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold text-2xl px-6 py-3 rounded-2xl shadow-lg animate-pulse inline-block">
+                NovaLabs
               </div>
-              <p className="mt-4 text-gray-400">
-                Creating digital experiences that transform businesses and
-                delight users.
+              <p className="text-gray-400 max-w-md mx-auto sm:mx-0">
+                Professional website and app development services for businesses
+                of all sizes.
               </p>
             </div>
 
@@ -761,7 +759,7 @@ const ProfessionalAboutPage = () => {
               <ul className="mt-4 space-y-2">
                 <li>
                   <a
-                    href="#"
+                    href="services"
                     className="text-gray-400 hover:text-white transition-colors"
                   >
                     Web Development
@@ -769,7 +767,7 @@ const ProfessionalAboutPage = () => {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="services"
                     className="text-gray-400 hover:text-white transition-colors"
                   >
                     Mobile Apps
@@ -777,133 +775,57 @@ const ProfessionalAboutPage = () => {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="services"
                     className="text-gray-400 hover:text-white transition-colors"
                   >
                     UI/UX Design
                   </a>
                 </li>
+
                 <li>
                   <a
-                    href="#"
+                    href="services"
                     className="text-gray-400 hover:text-white transition-colors"
                   >
-                    E-commerce
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Digital Marketing
+                    Web Apps
                   </a>
                 </li>
               </ul>
             </div>
 
-            <div>
-              <h3 className="text-lg font-bold">Company</h3>
-              <ul className="mt-4 space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Our Team
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Careers
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-bold">Connect</h3>
-              <div className="flex space-x-4 mt-4">
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  <svg
-                    className="h-6 w-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
-                  </svg>
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  <svg
-                    className="h-6 w-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                  </svg>
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  <svg
-                    className="h-6 w-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                  </svg>
-                </a>
-              </div>
-              <div className="mt-6">
-                <p className="text-gray-400">123 Innovation Drive</p>
-                <p className="text-gray-400">Tech City, TC 10101</p>
-                <p className="text-gray-400 mt-2">contact@techsolutions.com</p>
-                <p className="text-gray-400">+1 (555) 123-4567</p>
-              </div>
+            {/* Contact / Social Section */}
+            <div className="flex mt-20 mr-8 justify-center sm:justify-end">
+              <SocialButtons />
             </div>
           </div>
 
-          <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
-            <p>
-              &copy; {new Date().getFullYear()} TechSolutions. All rights
-              reserved.
+          {/* Bottom Bar */}
+          <div className="mt-5 border-t border-gray-700 pt-8 flex flex-col sm:flex-row justify-center sm:justify-between items-center text-center sm:text-left space-y-4 sm:space-y-0">
+            <p className="text-gray-400 text-sm">
+              &copy; 2022 NovaLabs. All rights reserved.
             </p>
+            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6">
+              {[
+                { name: "Contact Us", href: "/about" },
+                { name: "Privacy Policy", href: "/privecy" },
+                { name: "Terms of Service", href: "/terms" },
+                { name: "Cookie Policy", href: "/cookie" },
+              ].map((link, idx) => (
+                <a
+                  key={idx}
+                  href={link.href}
+                  className="relative text-gray-300 hover:text-white transition-colors duration-200 group"
+                >
+                  {link.name}
+                  <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
+
+        {/* Optional subtle gradient overlay for extra premium effect */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-indigo-900 via-purple-900 to-pink-900 opacity-10 pointer-events-none"></div>
       </footer>
     </div>
   );
