@@ -723,7 +723,7 @@ const ProfessionalAboutPage = () => {
                       <span className="flex items-center justify-center w-10 h-10 bg-white/20 rounded-full mr-4 shadow-sm">
                         📧
                       </span>
-                      sayannath8888@gmail.com
+                      novalabs365@gmail.com
                     </div>
                     <div className="flex items-center">
                       <span className="flex items-center justify-center w-10 h-10 bg-white/20 rounded-full mr-4 shadow-sm">

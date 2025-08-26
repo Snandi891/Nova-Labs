@@ -399,7 +399,6 @@ Thank you for shopping with us!
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
     { name: "About", path: "/about" },
-    { name: "sample", path: "/sample" },
   ];
 
   const [open, setOpen] = useState(false);
@@ -603,8 +602,8 @@ Thank you for shopping with us!
       </nav>
 
       {/* Hero Section */}
-      <div className="pt-16">
-        <div className="max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+      <div className="pt-26">
+        <div className="max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Left Card (Heading + Content) */}
             <div className="animate-fade-in -mt-36 text-center md:text-left">
