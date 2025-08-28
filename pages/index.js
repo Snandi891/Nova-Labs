@@ -602,7 +602,7 @@ Thank you for shopping with us!
       </nav>
 
       {/* Hero Section */}
-      <div className="pt-26">
+      <div className="pt-32 sm:pt-36 lg:pt-40">
         <div className="max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Left Card (Heading + Content) */}
@@ -745,7 +745,7 @@ Thank you for shopping with us!
             </div>
 
             {/* Right Card */}
-            <div className="relative animate-float">
+            <div className="relative animate-float mt-10 md:-mt-10 lg:-mt-20">
               {/* Background Blobs */}
               <div className="absolute -top-6 -right-6 w-40 h-40 rounded-full filter blur-3xl opacity-60 animate-blob bg-gradient-to-tr from-indigo-500 to-purple-500"></div>
               <div className="absolute -bottom-6 -left-6 w-40 h-40 rounded-full filter blur-3xl opacity-60 animate-blob animation-delay-2000 bg-gradient-to-tr from-purple-500 to-pink-500"></div>
