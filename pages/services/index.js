@@ -35,7 +35,7 @@ const ProductsPage = () => {
       type: "web",
       title: "E-commerce Platform",
       description: "Complete online store solution with inventory management",
-      price: 999,
+      price: 1999,
       features: [
         "Product Catalog",
         "Shopping Cart",
@@ -54,7 +54,7 @@ const ProductsPage = () => {
       title: "Corporate Website",
       description:
         "Professional business website with CMS and SEO optimization",
-      price: 499,
+      price: 1499,
       features: [
         "Responsive Design",
         "Content Management",
@@ -73,7 +73,7 @@ const ProductsPage = () => {
       title: "Mobile E-commerce App",
       description:
         "Native iOS/Android shopping experience with push notifications",
-      price: 699,
+      price: 1699,
       features: [
         "Push Notifications",
         "Payment Integration",
@@ -92,7 +92,7 @@ const ProductsPage = () => {
       title: "Fitness Tracking App",
       description:
         "Activity monitoring with health integration and personalized plans",
-      price: 499,
+      price: 1499,
       features: [
         "Workout Plans",
         "Progress Tracking",
@@ -128,7 +128,7 @@ const ProductsPage = () => {
       type: "app",
       title: "Restaurant Ordering App",
       description: "Food ordering and reservation system with table management",
-      price: 899,
+      price: 1899,
       features: [
         "Menu Management",
         "Table Booking",
