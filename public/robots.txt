@@ -1,9 +1,8 @@
-# *
+# robots.txt for https://nova-labs-puce.vercel.app/
+
+# Allow all crawlers
 User-agent: *
 Allow: /
 
-# Host
-Host: https://nova-labs-puce.vercel.app
-
-# Sitemaps
+# Sitemap
 Sitemap: https://nova-labs-puce.vercel.app/sitemap.xml
