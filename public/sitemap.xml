@@ -1,4 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<sitemap><loc>https://nova-labs-puce.vercel.app/sitemap-0.xml</loc></sitemap>
-</sitemapindex>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://nova-labs-puce.vercel.app/</loc>
+    <lastmod>2025-09-09T05:30:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nova-labs-puce.vercel.app/about</loc>
+    <lastmod>2025-09-09T05:30:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nova-labs-puce.vercel.app/cookie</loc>
+    <lastmod>2025-09-09T05:30:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nova-labs-puce.vercel.app/privecy</loc>
+    <lastmod>2025-09-09T05:30:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nova-labs-puce.vercel.app/sample</loc>
+    <lastmod>2025-09-09T05:30:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nova-labs-puce.vercel.app/services</loc>
+    <lastmod>2025-09-09T05:30:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nova-labs-puce.vercel.app/terms</loc>
+    <lastmod>2025-09-09T05:30:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>
