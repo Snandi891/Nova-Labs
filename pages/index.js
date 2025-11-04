@@ -231,7 +231,7 @@ Thank you for shopping with us!
         id: 1,
         title: "E-commerce Website",
         description: "Fully responsive online store with payment gateway",
-        price: 999,
+        price: 1999,
         features: [
           "Product Catalog",
           "Shopping Cart",
@@ -244,7 +244,7 @@ Thank you for shopping with us!
         id: 2,
         title: "Corporate Website",
         description: "Professional business website with CMS",
-        price: 499,
+        price: 2499,
         features: [
           "Responsive Design",
           "Content Management",
@@ -258,7 +258,7 @@ Thank you for shopping with us!
         title: "Portfolio Website",
         description:
           "Elegant showcase for creative work and make your portfolio shine",
-        price: 299,
+        price: 599,
         features: [
           "Gallery Layouts",
           "Custom Animations",
@@ -286,7 +286,7 @@ Thank you for shopping with us!
         id: 5,
         title: "Mobile E-commerce App",
         description: "Native iOS/Android shopping experience",
-        price: 699,
+        price: 1699,
         features: [
           "Push Notifications",
           "Payment Integration",
@@ -299,7 +299,7 @@ Thank you for shopping with us!
         id: 6,
         title: "Fitness Tracking App",
         description: "Activity monitoring with health integration",
-        price: 499,
+        price: 1499,
         features: [
           "Workout Plans",
           "Progress Tracking",
@@ -312,7 +312,7 @@ Thank you for shopping with us!
         id: 7,
         title: "Restaurant Ordering App",
         description: "Food ordering and reservation system",
-        price: 899,
+        price: 1899,
         features: [
           "Menu Management",
           "Table Booking",
@@ -325,7 +325,7 @@ Thank you for shopping with us!
         id: 8,
         title: "Task Management App",
         description: "Productivity tool for teams and task app",
-        price: 799,
+        price: 1799,
         features: [
           "Project Boards",
           "Team Collaboration",
@@ -1224,7 +1224,7 @@ Thank you for shopping with us!
                       <div className="mt-6 md:mt-8 flex flex-col xs:flex-row xs:items-center xs:justify-between space-y-3 xs:space-y-0">
                         <div>
                           <span className="text-xl md:text-2xl font-bold text-gray-900">
-                            ${product.price}
+                            ₹{product.price}
                           </span>
                           <span className="text-xs text-gray-500 block">
                             one-time payment

@@ -110,7 +110,7 @@ const ProductsPage = () => {
       type: "web",
       title: "Portfolio Website",
       description: "Elegant showcase for creative work with custom animations",
-      price: 299,
+      price: 599,
       features: [
         "Gallery Layouts",
         "Custom Animations",
@@ -667,7 +667,7 @@ const ProductsPage = () => {
                       {/* Price and Delivery */}
                       <div className="flex justify-between items-center mb-4">
                         <div className="text-2xl font-bold text-blue-600">
-                          ${product.price}
+                          ₹{product.price}
                         </div>
                         <div className="text-sm text-gray-500">
                           Delivery: {product.delivery}
